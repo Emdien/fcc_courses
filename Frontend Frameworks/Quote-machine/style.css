@@ -1,0 +1,41 @@
+body {
+    background-color: #ed8780;
+ }
+ 
+ #quote-box {
+   width: 500px;
+   background-color: white;
+   border-radius: 10px;
+   -webkit-box-shadow: 9px 9px 6px 2px rgba(0,0,0,0.5); 
+   box-shadow: 9px 9px 6px 2px rgba(0,0,0,0.5);
+   
+   
+ }
+ 
+ #quote-box i {
+ 
+     font-size: 1.75em;
+   
+ }
+ 
+ #tweet-quote i {
+   font-size: 1.2em;
+ }
+ 
+ #text {
+   font-size: 1.75em;
+ }
+ 
+ #author {
+   text-align: right;
+ 
+ }
+ #tweet-quote {
+   background-color: #b54e47;
+ }
+ 
+ #new-quote {
+   width: 100%;
+   background-color: #b54e47;
+   margin-left: 5px;
+ }
