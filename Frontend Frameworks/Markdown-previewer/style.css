@@ -1,0 +1,30 @@
+body {
+  background: #e9edf5;
+}
+
+#editor {
+  height: 100%;
+  -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  
+}
+
+.editor-wrapper {
+  height: 800px
+}
+
+table {
+  border: 1px solid;
+}
+
+th {
+  border: 1px solid;
+}
+
+td {
+  border: 1px solid;
+}
+
+
+
