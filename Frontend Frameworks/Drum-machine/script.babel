@@ -1,0 +1,131 @@
+
+
+// Audio bank taken from the solution for simplicity
+const bank = [
+  {
+    keyTrigger: 'Q',
+    id: 'Chord-1',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'
+  },
+  {
+    keyTrigger: 'W',
+    id: 'Chord-2',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3'
+  },
+  {
+    keyTrigger: 'E',
+    id: 'Chord-3',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3'
+  },
+  {
+    keyTrigger: 'A',
+    id: 'Shaker',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3'
+  },
+  {
+    keyTrigger: 'S',
+    id: 'Open-HH',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3'
+  },
+  {
+    keyTrigger: 'D',
+    id: 'Closed-HH',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3'
+  },
+  {
+    keyTrigger: 'Z',
+    id: 'Punchy-Kick',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3'
+  },
+  {
+    keyTrigger: 'X',
+    id: 'Side-Stick',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3'
+  },
+  {
+    keyTrigger: 'C',
+    id: 'Snare',
+    url: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
+  }
+];
+
+class Wrapper extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      display: ''
+    }
+    
+    this.updateDisplay = this.updateDisplay.bind(this)    // ??
+  }
+  
+  updateDisplay(text) {
+    this.setState({
+      display: text
+    })
+  }
+  
+ // Es posible que quiera hace un componente wrapper de los drumpads.
+  render() {
+    
+    const drums = bank.map(element => {
+      return (
+        <Drumpad keyTrigger={element.keyTrigger}
+          audio={element.url}
+          clipName={element.id} 
+          updateDisplay={this.updateDisplay} />
+      )
+    })
+    return (
+      <div>
+        <div>
+          {drums}
+        </div>
+        <div>
+          <Display text={this.state.display} />
+        </div>        
+      </div>
+    )
+  }
+}
+
+class Drumpad extends React.Component {
+  constructor(props) {
+    super(props)
+    
+    this.playSound = this.playSound.bind(this)
+    this.handlePress = this.handlePress.bind(this)
+  }
+  
+  componentDidMount() {
+    document.addEventListener("keydown", this.handlePress)
+  }
+  
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.handlePress)
+  }
+  
+  playSound() {
+     this.props.updateDisplay(this.props.clipName)
+  }
+  
+  handlePress(event) {
+    if (event.target.char == this.props.keyTrigger){
+      this.playSound()
+    }
+  }
+  
+  render() {
+    return(
+      <div
+        id={this.props.clipName}
+        onClick={this.playSound}
+        className="drum-pad"
+        >
+          <audio src={this.props.audio} className="clip" id={this.props.keyTrigger} />
+        {this.props.keyTrigger}
+        </div>
+    )
+  }
+}
+
